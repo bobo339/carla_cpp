@@ -74,16 +74,26 @@ file(GLOB libcarla_carla_road_element_headers "${libcarla_source_path}/carla/roa
 install(FILES ${libcarla_carla_road_element_headers} DESTINATION include/carla/road/element)
 
 # 类似地为其他模块收集头文件，并指定了各自的安装路径
+// 使用file(GLOB)命令收集${libcarla_source_path}/carla/road/general/目录下所有的.h头文件
+// 将收集到的头文件路径存储在变量libcarla_carla_road_general_headers中
 file(GLOB libcarla_carla_road_general_headers "${libcarla_source_path}/carla/road/general/*.h")
+//将前面收集到的头文件安装到目标目录include/carla/road/general下，
+//以便在项目安装后，这些头文件能处于合适的位置供其他代码引用
 install(FILES ${libcarla_carla_road_general_headers} DESTINATION include/carla/road/general)
 
+//使用file(GLOB)命令收集${libcarla_source_path}/carla/road/object/目录下所有的.h头文件
+//将收集到的头文件路径存储在变量libcarla_carla_road_object_headers中
 file(GLOB libcarla_carla_road_object_headers "${libcarla_source_path}/carla/road/object/*.h")
+//将前面收集到的头文件安装到目标目录include/carla/road/object下，
+//使得安装后相关代码能方便找到并使用这些头文件
 install(FILES ${libcarla_carla_road_object_headers} DESTINATION include/carla/road/object)
 
 file(GLOB libcarla_carla_road_signal_headers "${libcarla_source_path}/carla/road/signal/*.h")
 install(FILES ${libcarla_carla_road_signal_headers} DESTINATION include/carla/road/signal)
 
 file(GLOB libcarla_carla_rpc_headers "${libcarla_source_path}/carla/rpc/*.h")
+//把收集到的头文件安装到目标目录include/carla/rpc下，
+//确保在项目安装后，rpc相关的头文件可被正确访问
 install(FILES ${libcarla_carla_rpc_headers} DESTINATION include/carla/rpc)
 
 file(GLOB libcarla_carla_sensor_headers "${libcarla_source_path}/carla/sensor/*.h")
