@@ -142,8 +142,8 @@ git rm -rf .
 [ggiiatr](https://github.com/ggiiatr) 、
 [suki-mina](https://github.com/suki-mina) 、
 [qqggxx](https://github.com/qqggxx)、
-[leeyuu-z](http://github.com/leeyuu-z) 、
-[zi666zi](http://github.com/zi666zi) 、
+[leeyuu-z](https://github.com/leeyuu-z) 、
+[zi666zi](https://github.com/zi666zi) 、
 [dzq168](https://github.com/dzq168)、
 [riset77](https://github.com/riset77)、
 [ylyl551](https://github.com/yly551)、
@@ -216,6 +216,7 @@ git rm -rf .
 [Peng-185](https://github.com/Peng-185/carla_cpp/tree/dev)
 [ysthhhh](https://github.com/ysthhhh/carla_cpp)、
 [ylsj666](https://github.com/ylsj666/carla_cpp.git)、
+[wyy124](https://github.com/wyy124/carla_cpp)
 [2209040022ll](https://github.com/2209040022ll/carla_cpp.git)、
 [moon884](https://github.com/moon884/carla_cpp.git)、
 [haoCui-hutb](https://github.com/haoCui-hutb)
@@ -243,3 +244,12 @@ git rm -rf .
 [vllcf](https://github.com/vllcf)
 [wyy124](https://github.com/wyy124)
 [wenzheng236](https://github.com/wenzheng236)
+[qingyun-cmyk](https://github.com/qingyun-cmyk)
+[Sword761](https://github.com/Sword761)
+[xiaochenop](https://github.com/xiaochenop)
+[chaojixiangshuijiao](https://github.com/chaojixiangshuijiao)
+[liiiiiking](https://github.com/liiiiiking/carla_cpp.git)
+[Yygo100](https://github.com/Yygo100)
+[1351964418hml](https://github.com/1351964418hml)
+[xiejinkun0625](https://github.com/xiejinkun0625)
+[676sdaw](https://github.com/676sdaw)

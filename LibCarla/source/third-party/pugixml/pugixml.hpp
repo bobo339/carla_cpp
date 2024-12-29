@@ -386,9 +386,12 @@ namespace pugi
 		const char_t* as_string(const char_t* def = PUGIXML_TEXT("")) const;
 
 		//将属性值作为数字获取，如果转换不成功或者属性为空则返回默认值
-		int as_int(int def = 0) const;
-		unsigned int as_uint(unsigned int def = 0) const;
-		double as_double(double def = 0) const;
+		int as_int(int def = 0) const;// 该函数用于将对象所代表的数据转换为unsigned int类型并返回
+// 参数def是默认值，默认值为0，调用函数时若没有传入参数则使用该默认值，函数声明为常成员函数，不会改变对象状态
+		unsigned int as_uint(unsigned int def = 0) const;// 该函数用于将对象所代表的数据转换为double类型并返回
+// 参数def是默认值，默认值为0，调用函数时若没有传入参数则使用该默认值，同样是常成员函数，不会对对象本身做修改
+		double as_double(double def = 0) const;// 该函数用于将对象所代表的数据转换为float类型并返回
+// 参数def是默认值，默认值为0，也是常成员函数，调用时若不传参就使用默认值，保证不改变对象的状态
 		float as_float(float def = 0) const;
 
 	#ifdef PUGIXML_HAS_LONG_LONG
@@ -450,16 +453,17 @@ namespace pugi
 #endif
 
 	//一个用于操作 DOM（文档对象模型）树中节点的轻量级句柄
-	class PUGIXML_CLASS xml_node
+	class PUGIXML_CLASS xml_node// 定义名为xml_node的类，可能处于PUGIXML_CLASS相关的作用域下（具体取决于完整代码，可能是命名空间或类嵌套等情况）
 	{
-		friend class xml_attribute_iterator;
-		friend class xml_node_iterator;
-		friend class xml_named_node_iterator;
+		friend class xml_attribute_iterator;// 声明xml_attribute_iterator类为xml_node类的友元类，意味着它可以访问xml_node类的私有和保护成员
+		friend class xml_node_iterator;// 声明xml_node_iterator类为xml_node类的友元类
+		friend class xml_named_node_iterator;// 声明xml_named_node_iterator类为xml_node类的友元类
 
 	protected:
-		xml_node_struct* _root;
+		xml_node_struct* _root;// 定义一个指向xml_node_struct类型的指针，xml_node_struct大概率是在别处定义的、与XML节点表示相关的结构体
 
-		typedef void (*unspecified_bool_type)(xml_node***);
+		typedef void (*unspecified_bool_type)(xml_node***);// 定义一个函数指针类型unspecified_bool_type，它指向的函数接收一个指向xml_node类型的三级指针作为参数，且函数无返回值
+    // 具体用途可能和xml_node类相关的布尔判断、回调等机制有关，需结合更多代码上下文才能明确其确切作用
 
 	public:
 		// 默认构造函数。构造一个空节点。
@@ -1263,18 +1267,18 @@ namespace pugi
 		xpath_parse_result _result;
 
 	public:
-		// Construct exception from parse result
+		// 根据解析结果构造异常
 		explicit xpath_exception(const xpath_parse_result& result);
 
-		// Get error message
+		// 获取错误消息
 		virtual const char* what() const noexcept PUGIXML_OVERRIDE;
 
-		// Get parse result
+		// 获取解析结果
 		const xpath_parse_result& result() const;
 	};
 	#endif
 
-	// XPath node class (either xml_node or xml_attribute)
+	// XPath 节点类（要么是 xml_node，要么是 xml_attribute）
 	class PUGIXML_CLASS xpath_node
 	{
 	private:
@@ -1284,33 +1288,33 @@ namespace pugi
 		typedef void (*unspecified_bool_type)(xpath_node***);
 
 	public:
-		// Default constructor; constructs empty XPath node
+		// 默认构造函数；用于构造空的 XPath 节点
 		xpath_node();
 
-		// Construct XPath node from XML node/attribute
+		//从 XML 节点 / 属性构造 XPath 节点
 		xpath_node(const xml_node& node);
 		xpath_node(const xml_attribute& attribute, const xml_node& parent);
 
-		// Get node/attribute, if any
+		// 获取节点 / 属性（如果有的话）
 		xml_node node() const;
 		xml_attribute attribute() const;
 
-		// Get parent of contained node/attribute
+		// 获取所包含节点 / 属性的父节点
 		xml_node parent() const;
 
-		// Safe bool conversion operator
+		// Safe bool 转换运算符
 		operator unspecified_bool_type() const;
 
-		// Borland C++ workaround
+		// Borland C++ 解决方法
 		bool operator!() const;
 
-		// Comparison operators
+		// 比较运算符
 		bool operator==(const xpath_node& n) const;
 		bool operator!=(const xpath_node& n) const;
 	};
 
 #ifdef __BORLANDC__
-	// Borland C++ workaround
+	// Borland C++ 解决方法
 	bool PUGIXML_FUNCTION operator&&(const xpath_node& lhs, bool rhs);
 	bool PUGIXML_FUNCTION operator||(const xpath_node& lhs, bool rhs);
 #endif
@@ -1319,30 +1323,30 @@ namespace pugi
 	class PUGIXML_CLASS xpath_node_set
 	{
 	public:
-		// Collection type
+		// 一个固定大小的 XPath 节点集合
 		enum type_t
 		{
-			type_unsorted,			// Not ordered
-			type_sorted,			// Sorted by document order (ascending)
-			type_sorted_reverse		// Sorted by document order (descending)
+			type_unsorted,			// 未排序的
+			type_sorted,			// 按照文档顺序（升序）排序
+			type_sorted_reverse		// 按照文档顺序（降序）排序
 		};
 
 		// Constant iterator type
 		typedef const xpath_node* const_iterator;
 
-		// We define non-constant iterator to be the same as constant iterator so that various generic algorithms (i.e. boost foreach) work
+		// 我们将非常量迭代器定义为与常量迭代器相同，以便各种泛型算法（例如 Boost 库中的foreach）能够正常工作
 		typedef const xpath_node* iterator;
 
-		// Default constructor. Constructs empty set.
+		// 默认构造函数。构造空集合。
 		xpath_node_set();
 
-		// Constructs a set from iterator range; data is not checked for duplicates and is not sorted according to provided type, so be careful
+		// 通过迭代器范围构造一个集合；不会检查数据是否存在重复项，并且不会根据所提供的类型对数据进行排序，所以要多加小心
 		xpath_node_set(const_iterator begin, const_iterator end, type_t type = type_unsorted);
 
-		// Destructor
+		//析构函数
 		~xpath_node_set();
 
-		// Copy constructor/assignment operator
+		// 拷贝构造函数 / 赋值运算符
 		xpath_node_set(const xpath_node_set& ns);
 		xpath_node_set& operator=(const xpath_node_set& ns);
 
